@@ -7,9 +7,8 @@ const {upload,cosfun} = require('../../cos/cos')// 图片上传
 
 // 图片上传接口name:'file'
 router.post('/uploadres', upload.single('file'), async ctx=>{
-	// console.log(ctx.file)//接收前端上传的静态资源文件：ctx.file
 	try{
-		const res = await cosfun(ctx.file.filename,ctx.file.path)
+		const res = await cosfun(ctx.file.filename,ctx.file.path)//接收前端上传的静态资源文件：ctx.file
 		new result(ctx,'SUCCESS',200,'https://' + res).answer()
 	}catch(e){
 		new result(ctx,'上传失败,服务器发生错误',500).answer()
@@ -19,11 +18,9 @@ router.post('/uploadres', upload.single('file'), async ctx=>{
 router.post('/uploadshop', new Auth().m, async ctx=>{
 	const {id,name,address,logo} = ctx.request.body
 	new shopinfor(ctx,name,address,logo).start()
-	// 提交到数据库
-	// 数组类型不需要这样：'${}'
-	let query = `db.collection('shop-infor').add({data:{name:'${name}',address:'${address}',logo:${logo}}})`
+	let query = `db.collection('shop-infor').add({data:{name:'${name}',address:'${address}',logo:${logo}}})`// 数组类型不需要这样：'${}'
 	try{
-		await new getToken().posteve(Addurl,query)
+		await new getToken().posteve(Addurl,query)	// 提交到数据库
 		new result(ctx,'提交成功').answer()
 	}catch(e){
 		new result(ctx,'提交失败,服务器发生错误',500).answer()

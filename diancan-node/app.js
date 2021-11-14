@@ -23,10 +23,10 @@ const router = require('koa-router')()//实例化new路由
 	router.use('/api',dish)
 	router.use('/api',oreder)
 	router.use('/api',code)
-app.use(router.routes()).use(router.allowedMethods())
+app.use(router.routes())
+app.use(router.allowedMethods())
 
 // 自定义启动端口5000：不能跟其他程序的启动端口一样，否则造成端口冲突
 app.listen(5000);
-
 
 console.log('5000端口服务器启动成功')
